@@ -6,7 +6,7 @@ using namespace std;
 int alternatingCharacters(string s) {
   int i, dt=0;
   char prev = s[0];
-
+  
   for(i=1; s[i]!='\0'; i++)
   {
     if(prev == s[i])
