@@ -6,7 +6,7 @@ int main()
   int t;
   cin>>t;
 
-  for(int z=0; z<t; z++)
+  for(int z=1; z<=t; z++)
   {
     int n, q, i, j, totalSweetness=0;
 
@@ -26,6 +26,8 @@ int main()
 
       switch (query) {
         case 'Q':
+          a=a-1;
+          b=b-1;
           k=1, sign=1;
           sweetness=0;
           for(j=a; j<=b; j++)
@@ -36,6 +38,7 @@ int main()
           }
         break;
         case 'U':
+          a=a-1;
           arr[a]=b;
         break;
       }
