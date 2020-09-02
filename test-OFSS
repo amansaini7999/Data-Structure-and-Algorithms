@@ -1,0 +1,85 @@
+//Compile time polymorpshism
+
+//Function Overloading
+
+void fun(int a, int b)
+{
+	cout<<a+b;
+}
+
+void fun(int a, int b, int c)
+{
+	cout<<a+b+c;
+}
+
+int main()
+{
+	int a, b, c;
+	cin>>a>>b>>c;
+	fun(a, b);
+	fun(a, b, c);
+	return 0;
+}
+
+//Runtime Polymorphism
+
+Class A
+{
+	public:
+		virtual void fun(...)
+		{
+			cout<<"A Called";
+		}
+}
+
+Class B :: Public A
+{
+	public:
+		void fun(...)
+		{
+			cout<<"B Called";
+		}
+}
+
+int main()
+{
+	A obj;
+	B b;
+	obj = &b;
+	
+	obj.fun();
+}
+
+
+//Output
+B Called
+
+
+struct node
+{
+	int data;
+	node* next;
+};
+
+node* top==NULL;
+
+void push(int d)
+{
+	node* temp;
+	temp->data = d;
+	temp = top;
+	top = temp;
+}
+
+void pop()
+{
+	node* temp;
+	temp = top;
+	top = top->next;
+	free(temp);
+}
+
+void show()
+{
+	cout<<top->data;
+}
