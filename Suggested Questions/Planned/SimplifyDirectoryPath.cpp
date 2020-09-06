@@ -3,42 +3,53 @@ using namespace std;
 
 string simplifyPath(string A)
 {
-  stack<char> s;
-  char ch = A[A.size()-1];
-  for(int i=A.size()-1; i>=0; i--)
+  stack<string> s, temp;
+  string dir, res;
+
+  int i=0;
+  while(i<A.size())
   {
-    if(s.empty() && A[i]=='/')
-      continue;
+    dir.clear();
 
-    else if(A[i]=='.' && ch == '.')
-      continue;
+    while(A[i]=='/')
+      i++;
 
-    else if(A[i]=='.')
-      break;
-
-    else if(A[i]!='/')
-      s.push(A[i]);
-
-    else if(!s.empty())
+    while(i<A.size() && A[i]!='/')
     {
-      if(s.top()=='/')
-        continue;
-      else
-        s.push(A[i]);
+      dir.push_back(A[i]);
+      i++;
     }
+
+    if(dir.compare("..")==0)
+    {
+      if(!s.empty())
+        s.pop();
+    }
+
+    else if(dir.compare(".")==0)
+      continue;
+
+    else if(dir.size()!=0)
+      s.push(dir);
   }
 
-  if(s.empty())
-    s.push('/');
-
-  string str;
   while(!s.empty())
   {
-      char top = s.top();
-      s.pop();
-      str+=top;
+    temp.push(s.top());
+    s.pop();
   }
-  return str;
+
+  while(!temp.empty())
+  {
+    res+='/';
+    res+=temp.top();
+    temp.pop();
+  }
+
+  if(res.size()==0)
+    res+='/';
+
+  return res;
 }
 
 int main()
