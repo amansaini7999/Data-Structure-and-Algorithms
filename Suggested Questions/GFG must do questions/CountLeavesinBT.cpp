@@ -2,15 +2,12 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// Tree Node
 struct Node
 {
     int data;
-    Node* left;
-    Node* right;
+    struct Node *left;
+    struct Node *right;
 };
-
-// Utility function to create a new Tree Node
 Node* newNode(int val)
 {
     Node* temp = new Node;
@@ -20,8 +17,6 @@ Node* newNode(int val)
 
     return temp;
 }
-
-// Function to Build Tree
 Node* buildTree(string str)
 {
     // Corner Case
@@ -84,104 +79,63 @@ Node* buildTree(string str)
 
     return root;
 }
+int countLeaves(struct Node* root);
 
-
-Node* bToDLL(Node *root);
-
-
-/* Function to print nodes in a given doubly linked list */
-void printList(Node *node)
-{
-    Node *prev = NULL;
-    while (node!=NULL)
-    {
-        cout << node->data << " ";
-        prev = node;
-        node = node->right;
-    }
-    cout << endl;
-    while (prev!=NULL)
-    {
-        cout << prev->data << " ";
-        prev = prev->left;
-    }
-    cout << endl;
-}
-
-void inorder(Node *root)
-{
-   if (root != NULL)
-   {
-       inorder(root->left);
-       cout << root->data;
-       inorder(root->right);
-   }
-}
-
-/* Driver program to test size function*/
 int main()
 {
-  int t;
-  cin >> t;
-  getchar();
-
-  while (t--)
-  {
-     string inp;
-     getline(cin, inp);
-     Node *root = buildTree(inp);
-
-
-     Node *head = bToDLL(root);
-     printList(head);
-
-  }
-  return 0;
+    int t;
+	scanf("%d ",&t);
+    while(t--)
+    {
+        string s;
+		getline(cin,s);
+		Node* root = buildTree(s);
+		cout<< countLeaves(root)<<endl;
+    }
+    return 0;
 }
-
 // } Driver Code Ends
 
 
-/* Structure for tree and linked list
+//User function Template for C++
 
+/* A binary tree node has data, pointer to left child
+   and a pointer to right child
 struct Node
 {
     int data;
-    struct Node* left;
-    struct Node* right;
+    Node* left;
+    Node* right;
+}; */
 
-    Node(int x){
-        data = x;
-        left = right = NULL;
-    }
-};
- */
+/* Should return count of leaves. For example, return
+    value should be 2 for following tree.
+         10
+      /      \
+   20       30 */
 
-// This function should return head to the DLL
-
-Node * bToDLL(Node *root)
+int solve(Node *root, int &count)
 {
-    // your code here
-    stack<Node *> st;
-    Node *prev;
+  if(root==NULL)
+    return 0;
 
-    while(root!=NULL || !st.empty())
-    {
-      while(root!=NULL)
-      {
-        st.push(root);
-        prev = root;
-        root = root->left;
-      }
+  if(root->left==NULL && root->right==NULL)
+  {
+    count++;
+    return 0;
+  }
 
-      root = st.top();
-      st.pop();
-      root->right = prev; 
+  solve(root->left, count);
+  solve(root->right, count);
 
-      //cout<<root->data<<" ";
+  return 0;
+}
 
-      root = root->right;
-    }
+int countLeaves(Node* root)
+{
+  // Your code here
+  int count=0;
+  solve(root, count);
 
-    return NULL;
+  return count;
 }
