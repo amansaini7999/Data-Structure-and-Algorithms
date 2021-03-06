@@ -107,24 +107,24 @@ struct Node
 }; */
 
 /* Computes the diameter of binary tree with given root.  */
-int solve(Node *node, int &ans)
+int solve(Node *node, int &res)
 {
   if(node==NULL)
     return 0;
 
-  int l = solve(node->left, ans);
-  int r = solve(node->right, ans);
+  int l = solve(node->left, res);
+  int r = solve(node->right, res);
 
-  int height = max(l, r)+1;
-  int temp = max(height, 1+l+r);
-  ans = max(ans, temp);
+  int temp = max(l, r)+1;
+  int ans = max(temp, 1+l+r);
+  res = max(res, ans);
 
-  return height;
+  return temp;
 }
 
 int diameter(Node* node) {
     // Your code here
-    int ans=INT_MIN;
-    solve(node, ans);
-    return ans;
+    int res=INT_MIN;
+    solve(node, res);
+    return res;
 }
