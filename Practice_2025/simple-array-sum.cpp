@@ -2,6 +2,15 @@
 
 using namespace std;
 
+int simplArraySum(vector<int> simpleArray) {
+	int sumOfArray = 0;
+	for(int element: simpleArray) {
+		sumOfArray+=element;
+	}
+
+	return sumOfArray;
+}
+
 int main() {
 	int sizeOfArray;
 	vector<int> simpleArray;
@@ -16,12 +25,7 @@ int main() {
 		simpleArray.push_back(arrayElement);
 	}
 
-	int sumOfArray = 0;
-	for(int element: simpleArray) {
-		sumOfArray+=element;
-	}
-
-	cout<<"Sum: "<<sumOfArray;
+	cout<<"Sum: "<<simplArraySum(simpleArray);
 
 	return 0;
 }
