@@ -2,14 +2,14 @@
 using namespace std;
 
 int findMinimumTrucks(vector<int> truckCapacity, int n, int m) {
-	sort(truckCapacity.begin(), truckCapacity.end());
+	sort(truckCapacity.begin(), truckCapacity.end(), greater<>());
 
 	int totalCapacity = 0;
-	for (int i=n-1; i>=0; i--) {
+	for (int i=0; i<n; i++) {
 		totalCapacity+=truckCapacity[i];
 
 		if (totalCapacity>m) {
-			return n-i;
+			return i+1;
 		}
 	}
 
